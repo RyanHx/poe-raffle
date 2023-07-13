@@ -1,0 +1,30 @@
+{
+  "name": "poe-raffle",
+  "productName": "PoE Raffle",
+  "version": "1.0.0",
+  "description": "Run a raffle from PoE in-game chat.",
+  "main": "main.js",
+  "scripts": {
+    "start-dev": "set NODE_ENV=development&&npx electronmon .",
+    "start-prod": "set NODE_ENV=production&&electron .",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "RyanHx",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-deb": "^6.2.1",
+    "@electron-forge/maker-rpm": "^6.2.1",
+    "@electron-forge/maker-squirrel": "^6.2.1",
+    "@electron-forge/maker-zip": "^6.2.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
+    "electron": "^25.2.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "poe-log-events": "^4.0.0"
+  }
+}

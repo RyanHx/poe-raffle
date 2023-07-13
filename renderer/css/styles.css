@@ -1,0 +1,11 @@
+#entries-table-wrapper {
+    max-height: 500px;
+} 
+
+div.border {
+    max-height: 565px;
+}
+
+#settings-btn {
+    padding-bottom: 6.5px;
+}
