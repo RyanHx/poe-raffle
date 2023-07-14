@@ -14,7 +14,13 @@ let raffleString = "",
   clientLang = Language.English;
 
 function createLogListener(language, path) {
-  if (poeLog) poeLog.removeAllListeners();
+  if (poeLog) {
+    try {
+      poeLog.removeAllListeners();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   const logOptions = {
     logFilePath: path,
     ignoreDebug: true,
