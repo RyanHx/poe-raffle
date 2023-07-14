@@ -1,6 +1,5 @@
 let running = false,
-    entries = [],
-    lastResize = [];
+    entries = [];
 
 function keywordInput() {
     const val = document.getElementById("keywordInput").value;
