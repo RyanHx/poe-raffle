@@ -3,7 +3,7 @@
 <div align="center">
 
 <h1 align="center">PoE Raffle</h1>
-<img src="https://github.com/RyanHx/poe-raffle/assets/19942516/08515cd1-a7c9-491e-9ce6-9c17d988ad39.png" alt="Screenshot of running raffle" width="35%" height="35%">
+<img src="https://github.com/RyanHx/poe-raffle/assets/19942516/08515cd1-a7c9-491e-9ce6-9c17d988ad39.png" alt="Screenshot of running raffle" width="40%" height="40%">
   <p align="center">
     Run a raffle from PoE in-game chat.
     <br />
