@@ -94,7 +94,7 @@ function showToast(isError, message) {
     <div class="toast-body">
         ${message}
     </div>
-    <button type="button" class="btn btn-dark me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">X</button>
+    <button type="button" class="btn btn-dark me-2 m-auto" data-bs-dismiss="toast" aria-label="Dismiss">X</button>
     </div>
     `;
     const container = document.getElementById("toastPlacement");
@@ -149,7 +149,7 @@ window.electronAPI.toastError((_event, value) => {
 
 window.electronAPI.toastPrimary((_event, value) => {
     showToast(false, value);
-})
+});
 
 window.electronAPI.getSettings().then((settings) => {
     document.getElementById("pathInput").value = settings.logPath;

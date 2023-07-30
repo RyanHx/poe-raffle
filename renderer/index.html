@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -9,8 +9,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="css/toastify.min.css">
-  <script type="text/javascript" src="js/toastify-js.js"></script> -->
   <title>PoE Raffle</title>
 </head>
 
@@ -53,8 +51,7 @@
                 <form>
                   <div class="mb-2">
                     <label for="pathInput" class="form-label user-select-none">Client log path</label>
-                    <input type="text" class="form-control" id="pathInput" accept=".txt" readonly
-                      aria-describedby="pathHelp">
+                    <input type="text" class="form-control" id="pathInput" readonly aria-describedby="pathHelp">
                     <div id="pathHelp" class="form-text user-select-none">Select Client.txt from <strong>Path of
                         Exile/logs/</strong>.
                     </div>
@@ -79,7 +76,7 @@
             </div>
           </div>
         </div>
-        <button id="support-btn" role="button" class="btn btn-outline-primary btn-sm mb-0 mb-sm-4"
+        <button id="support-btn" class="btn btn-outline-primary btn-sm mb-0 mb-sm-4"
           data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Buy me a coffee!">☕</button>
       </div>
     </div>
@@ -160,7 +157,7 @@
         </div>
       </div>
     </div>
-    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" id="toastPlacement">      
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" id="toastPlacement">
     </div>
   </div>
   <script src="js/tsparticles.confetti.bundle.min.js"></script>
