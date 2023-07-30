@@ -28,6 +28,7 @@ function createLogListener(language, path) {
   };
   poeLog = new PathOfExileLog(logOptions);
   poeLog.on("error", (err) => {
+    mainWindow.webContents.send('toast-error', err.message);
     console.error(err);
   });
   poeLog.on("whisperReceived", (event) => {
@@ -47,6 +48,7 @@ async function handleFileOpen() {
       try {
         createLogListener(clientLang, clientLogPath);
       } catch (err) {
+        mainWindow.webContents.send('toast-error', err.message);
         console.error(err);
       }
     }
@@ -62,6 +64,7 @@ function saveSettings() {
   settings = JSON.stringify(settings);
   fs.writeFile(settingsPath, settings, (err) => {
     if (err) {
+      mainWindow.webContents.send('toast-error', err.message);
       console.error(err);
     }
   });
@@ -84,7 +87,7 @@ function setLanguage(lan) {
 
 let testCounter = 0; // <-- for adding test entries
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: isDev ? 800 : 400,
     height: 600,
     minWidth: 350,
@@ -98,19 +101,49 @@ function createWindow() {
       label: app.name,
       submenu: [
         {
-          click: () => win.webContents.send('add-entry', `test${testCounter++}`),
+          click: () => mainWindow.webContents.send('add-entry', `Exile${testCounter++}`),
           label: 'Add test entry'
         },
         {
-          click: () => win.webContents.openDevTools(),
+          click: () => mainWindow.webContents.send('toast-error', 'This is an error'),
+          label: 'Send error toast'
+        },
+        {
+          click: () => mainWindow.webContents.send('toast-primary', 'This is a toast'),
+          label: 'Send primary toast'
+        },
+        {
+          click: () => mainWindow.webContents.openDevTools(),
           label: 'Open dev tools'
         }
       ]
     }
   ]);
-  win.loadFile('./renderer/index.html');
+  mainWindow.loadFile('./renderer/index.html')
+    .then(() => {
+      // Settings
+      if (!fs.existsSync(settingsPath)) {
+        saveSettings();
+        try {
+          createLogListener(clientLang, clientLogPath);
+        } catch (err) {
+          console.log('whenReadyNoSettings');
+          console.error(err);
+          mainWindow.webContents.send('toast-error', err.message);
+        }
+      } else {
+        getSettings()
+          .then(settings => {
+            createLogListener(settings.clientLang, settings.logPath);
+          })
+          .catch(err => {
+            console.log('whenReadySettings');
+            console.error(err);
+            mainWindow.webContents.send('toast-error', err.message);
+          });
+      }
+    });
   Menu.setApplicationMenu(null);
-  mainWindow = win;
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     if (url === "https://www.buymeacoffee.com/ryanhx") {
       shell.openExternal(url);
@@ -119,7 +152,7 @@ function createWindow() {
   });
   if (isDev) {
     Menu.setApplicationMenu(menu)
-    win.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
 }
 if (require('electron-squirrel-startup')) app.quit();
@@ -140,21 +173,6 @@ app.whenReady().then(() => {
   ipcMain.on('set-clipboard', (event, data) => clipboard.writeText(data));
   ipcMain.handle('open-client-file', handleFileOpen);
   ipcMain.handle('get-settings', getSettings);
-  // Settings
-  if (!fs.existsSync(settingsPath)) {
-    saveSettings();
-    try {
-      createLogListener(clientLang, clientLogPath);
-    } catch (err) {
-      console.error(err);
-    }
-  } else {
-    getSettings()
-      .then(settings => {
-        createLogListener(settings.clientLang, settings.logPath);
-      })
-      .catch(err => console.error(err));
-  }
   // Window
   createWindow();
   app.on('activate', () => {

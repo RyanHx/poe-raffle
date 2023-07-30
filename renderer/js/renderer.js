@@ -82,6 +82,26 @@ async function handleFilePick() {
     }
 }
 
+function showToast(isError, message) {
+    const div = document.createElement("div");
+    div.classList.add("toast", "align-items-center", `${isError ? "text-bg-danger" : "text-bg-primary"}`, "border-0");
+    div.role = "alert";
+    div.ariaLive = "assertive";
+    div.ariaAtomic = "true";
+    div.innerHTML =
+        `    
+    <div class="d-flex">
+    <div class="toast-body">
+        ${message}
+    </div>
+    <button type="button" class="btn btn-dark me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">X</button>
+    </div>
+    `;
+    const container = document.getElementById("toastPlacement");
+    container.appendChild(div);
+    (new bootstrap.Toast(div)).show();
+}
+
 // Receive entry from main process
 window.electronAPI.addEntry((_event, value) => {
     if (!entries.includes(value)) {
@@ -95,7 +115,7 @@ window.electronAPI.addEntry((_event, value) => {
         // Column 1
         const bootCol1 = document.createElement("div");
         bootCol1.classList.add('col-4');
-        bootCol1.textContent = value;        
+        bootCol1.textContent = value;
         // Column 2
         const bootCol2 = document.createElement("div");
         bootCol2.classList.add('col-4', 'text-end');
@@ -122,6 +142,14 @@ window.electronAPI.addEntry((_event, value) => {
         cell.appendChild(bootRow);
     }
 });
+
+window.electronAPI.toastError((_event, value) => {
+    showToast(true, value);
+});
+
+window.electronAPI.toastPrimary((_event, value) => {
+    showToast(false, value);
+})
 
 window.electronAPI.getSettings().then((settings) => {
     document.getElementById("pathInput").value = settings.logPath;
