@@ -23,7 +23,9 @@
     "electron": "^25.2.0"
   },
   "dependencies": {
+    "bootstrap": "^5.3.1",
     "electron-squirrel-startup": "^1.0.0",
-    "poe-log-events": "^4.0.0"
+    "poe-log-events": "^4.0.0",
+    "tsparticles-confetti": "^2.11.1"
   }
 }
