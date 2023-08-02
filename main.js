@@ -170,7 +170,6 @@ app.whenReady().then(() => {
     setLanguage(lang);
     if (isDev) console.log(`Language set to ${lang}`);
   });
-  ipcMain.on('set-clipboard', (event, data) => clipboard.writeText(data));
   ipcMain.handle('open-client-file', handleFileOpen);
   ipcMain.handle('get-settings', getSettings);
   // Window

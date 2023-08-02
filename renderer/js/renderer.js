@@ -39,6 +39,7 @@ function drawWinner() {
     const winner = entries[Math.floor(Math.random() * entries.length)];
     document.getElementById("winner").textContent = winner;
     document.getElementById("winner-wrapper").classList.remove("visually-hidden");
+    navigator.clipboard.writeText(winner);
     // https://www.npmjs.com/package/tsparticles-confetti
     (async () => {
         const defaults = {
@@ -58,7 +59,6 @@ function drawWinner() {
             position: { x: 100, y: 80 },
         });
     })();
-    window.electronAPI.setClipboard(winner);
 }
 
 function resetRaffle() {
