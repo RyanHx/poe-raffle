@@ -39,23 +39,25 @@ function drawWinner() {
     const winner = entries[Math.floor(Math.random() * entries.length)];
     document.getElementById("winner").textContent = winner;
     document.getElementById("winner-wrapper").classList.remove("visually-hidden");
-    // https://confetti.js.org/more.html
-    const defaults = {
-        startVelocity: 50,
-        particleCount: 150,
-        spread: 60,
-        scalar: 0.7
-    }
-    confetti({
-        ...defaults,
-        angle: 45,
-        origin: { x: 0, y: 0.8 },
-    });
-    confetti({
-        ...defaults,
-        angle: 150,
-        origin: { x: 1, y: 0.8 },
-    });
+    // https://www.npmjs.com/package/tsparticles-confetti
+    (async () => {
+        const defaults = {
+            startVelocity: 50,
+            count: 150,
+            spread: 60,
+            scalar: 0.7
+        }
+        await confetti({
+            ...defaults,
+            angle: 45,
+            position: { x: 0, y: 80 },
+        });
+        await confetti({
+            ...defaults,
+            angle: 135,
+            position: { x: 100, y: 80 },
+        });
+    })();
     window.electronAPI.setClipboard(winner);
 }
 
