@@ -80,9 +80,18 @@ async function getSettings() {
 }
 
 function setLanguage(lan) {
-  poeLog.changeLanguage(lan);
   clientLang = lan;
   saveSettings();
+  try {
+    poeLog.changeLanguage(lan);
+  } catch (err) {
+    if (err instanceof TypeError) {
+      mainWindow.webContents.send('toast-error', 'Log listener not initialized, check log path.');
+    } else {
+      mainWindow.webContents.send('toast-error', err.message);
+    }
+    console.error(err);
+  }
 }
 
 let testCounter = 0; // <-- for adding test entries
