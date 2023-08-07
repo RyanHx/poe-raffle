@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, dialog, ipcMain, clipboard, shell } = require('electron');
+const { app, BrowserWindow, Menu, dialog, ipcMain, shell } = require('electron');
 const { Language, PathOfExileLog } = require('poe-log-events');
 const path = require('path');
 const fs = require('fs');
@@ -132,6 +132,14 @@ function createWindow() {
     .then(() => {
       // Settings
       if (!fs.existsSync(settingsPath)) {
+        if (!fs.existsSync(clientLogPath)) {
+          const steamPath = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Path of Exile\\logs\\Client.txt';
+          if (fs.existsSync(steamPath)) {
+            clientLogPath = steamPath;
+          } else {
+            mainWindow.webContents.send('toast-error', 'Could not find game installation - check settings.');
+          }
+        }
         saveSettings();
         try {
           createLogListener(clientLang, clientLogPath);
