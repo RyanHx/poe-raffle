@@ -41,6 +41,8 @@ The installer for your OS will be found in the `/out/make/` directory.
 3. Start the raffle!
 4. Draw a winner!
 
+The winner's character name will be copied to the clipboard so you can message them immediately.
+
 Another winner can be drawn to reroll the result.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
