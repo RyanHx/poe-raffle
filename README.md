@@ -13,7 +13,7 @@
 </div>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Installation
 
 ### Windows
 
@@ -28,6 +28,10 @@ npm run make
 ```
 
 The installer for your OS will be found in the `/out/make/` directory.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
 
 ### Raffles
 
