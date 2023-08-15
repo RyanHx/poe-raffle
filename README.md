@@ -35,15 +35,15 @@ The installer for your OS will be found in the `/out/make/` directory.
 
 ### Raffles
 
-1. With the program running, open the settings and point the log field to `Client.txt`, found in the `logs` folder of your PoE installation directory. If you installed the PoE standalone client in the default location, this will not need to be changed.
-
-2. Optionally choose a keyword to listen for in your whispers.
-3. Start the raffle!
-4. Draw a winner!
+1. Optionally choose a keyword to listen for in your whispers.
+2. Start the raffle.
+3. Draw a winner!
 
 The winner's character name will be copied to the clipboard so you can message them immediately.
 
 Another winner can be drawn to reroll the result.
+
+If you are notified the app can't locate PoE's log file (e.g. you installed PoE in a non-default location), open the settings and point the log field to `<PoE installation folder>/logs/Client.txt`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
