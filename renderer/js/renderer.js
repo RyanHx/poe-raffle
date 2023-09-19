@@ -110,17 +110,14 @@ window.electronAPI.addEntry((_event, value) => {
         entries.push(value);
         const table = document.getElementById("entries-table");
         const row = table.insertRow(-1);
-        const cell = row.insertCell();
-        // Bootstrap row
-        const bootRow = document.createElement("div");
-        bootRow.classList.add('row', 'justify-content-end', 'align-items-center', 'mx-3');
+        row.insertCell().classList.add('col-4');
         // Column 1
-        const bootCol1 = document.createElement("div");
-        bootCol1.classList.add('col-4');
-        bootCol1.textContent = value;
+        const cell1 = row.insertCell();
+        cell1.classList.add('col-4');
+        cell1.textContent = value;
         // Column 2
-        const bootCol2 = document.createElement("div");
-        bootCol2.classList.add('col-4', 'text-end');
+        const cell2 = row.insertCell();
+        cell2.classList.add('col-4', 'text-end');
         const btn = document.createElement("button");
         btn.classList.add('btn', 'btn-outline-danger');
         btn.type = "button";
@@ -129,7 +126,7 @@ window.electronAPI.addEntry((_event, value) => {
         btn.addEventListener(
             "click",
             (_event) => {
-                const name = _event.target.closest('.col-4').previousElementSibling.textContent;
+                const name = _event.target.closest('td').previousElementSibling.textContent;
                 entries.splice(entries.indexOf(name), 1);
                 _event.target.closest('tr').remove();
                 console.log('Entry removed');
@@ -137,11 +134,7 @@ window.electronAPI.addEntry((_event, value) => {
             },
             false
         );
-        bootCol2.appendChild(btn);
-        // Add columns
-        bootRow.appendChild(bootCol1);
-        bootRow.appendChild(bootCol2);
-        cell.appendChild(bootRow);
+        cell2.appendChild(btn);
     }
 });
 
