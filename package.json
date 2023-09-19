@@ -1,7 +1,7 @@
 {
   "name": "poe-raffle",
   "productName": "PoE Raffle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run a raffle from PoE in-game chat.",
   "main": "main.js",
   "scripts": {
